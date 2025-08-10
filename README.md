@@ -205,46 +205,9 @@ SOFTWARE.
 
 ## 🙌 Made with ❤️
 
-By [Your Name] – for **private, powerful, and explainable AI**.
+By Sabelo Gumede – for **private, powerful, and explainable AI**.
 
 Have ideas or feedback? Open an issue or PR!
 
 Keep building the future — locally. 🚀
-```
-
----
-
-## ✅ How to Use This on GitHub
-
-### 1. Create a `screenshots/` folder
-```bash
-mkdir screenshots
-```
-
-### 2. Take a screenshot of your app and save it:
-```
-screenshots/screenshot.png
-```
-
-### 3. Update `[Your Name]` and `your-username` in the README
-
-### 4. Add a `LICENSE` file (MIT)
-
-Create `LICENSE` in your root:
-```text
-MIT License
-
-Copyright (c) 2025 [Your Name]
-
-[Full MIT text from https://opensource.org/license/mit/]
-```
-
-### 5. Push to GitHub
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/your-username/sentiment-analyzer-mistral.git
-git branch -M main
-git push -u origin main
 ```
