@@ -1,5 +1,11 @@
 # 🎭 Local Sentiment Analyzer with Mistral and Ollama
 
+## 🖼️ Home Screenshot
+
+> 💡![Aprication Screen](screenshots/sentiment-analyzer-home-screen.png)
+
+-----
+
 A **100% local, private, and explainable** sentiment analyzer that runs on your machine with no internet connection and no data leaks.
 
 This project is perfect for analyzing customer feedback, social media, or emails securely and offline.
@@ -81,11 +87,6 @@ The application will be accessible in your browser at: [**http://localhost:8501*
 
 -----
 
-## 🖼️ Screenshot
-
-> 💡 `screenshots/sentiment-analyzer-home-screen.png`
-
------
 
 ## 🧱 Architecture
 
