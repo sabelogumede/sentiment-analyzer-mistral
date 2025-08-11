@@ -35,7 +35,7 @@ Before you begin, ensure you have the following installed:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/sentiment-analyzer-mistral.git
+git clone https://github.com/sabelogumede/sentiment-analyzer-mistral.git
 cd sentiment-analyzer-mistral
 
 # Create and activate a virtual environment
