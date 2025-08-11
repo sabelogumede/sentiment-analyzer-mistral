@@ -1,213 +1,179 @@
-### Sentiment Analyzer using Mistral via Ollama
-This README provides a comprehensive overview of the Sentiment Analyzer project, including setup instructions, features, architecture, and more. It is designed to be user-friendly and informative for anyone looking to understand or contribute to the project.
+# 🎭 Local Sentiment Analyzer with Mistral and Ollama
 
+A **100% local, private, and explainable** sentiment analyzer that runs on your machine with no internet connection and no data leaks.
 
-```markdown
-# 🎭 Sentiment Analyzer using Mistral via Ollama
+This project is perfect for analyzing customer feedback, social media, or emails securely and offline.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.116.1-green)](https://fastapi.tiangolo.com)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.48.0-orange)](https://streamlit.io)
-[![Ollama](https://img.shields.io/badge/Ollama-Mistral-9cf)](https://ollama.com)
+**Built with:**
 
-A **local, private, and explainable** sentiment analyzer that runs 100% on your machine — no internet, no data leaks.
+  * **FastAPI**: The backend API
+  * **Streamlit**: The frontend UI
+  * **Mistral via Ollama**: The local Large Language Model (LLM) for sentiment classification
+  * **Explainable AI**: Shows *why* a specific sentiment was assigned
 
-Built with:
-- 🔤 **FastAPI** – Backend API
-- 🎨 **Streamlit** – Frontend UI
-- 🧠 **Mistral via Ollama** – Local LLM for classification
-- 💬 **Explainable AI** – Shows *why* a sentiment was assigned
-
-Perfect for analyzing customer feedback, social media, emails, and more — all offline and secure.
-
----
+-----
 
 ## 🚀 Quick Start
 
-### 1. Prerequisites
+### 1\. Prerequisites
 
-- [Python 3.9 or higher](https://www.python.org/downloads/)
-- [Ollama](https://ollama.com/download) (to run Mistral locally)
-- [Git](https://git-scm.com/downloads) (optional)
+Before you begin, ensure you have the following installed:
 
-> ✅ Works on **Windows, macOS, and Linux**
+  * **Python 3.9** or higher
+  * **Ollama**: Used to run the Mistral model locally. [Download here](https://ollama.com/download).
+  * **Git**: (Optional) For cloning the repository.
 
----
+✅ This project is compatible with **Windows, macOS, and Linux**.
 
-### 2. Clone and Setup
+### 2\. Setup
 
 ```bash
-# Clone the repo
+# Clone the repository
 git clone https://github.com/your-username/sentiment-analyzer-mistral.git
 cd sentiment-analyzer-mistral
 
-# Create virtual environment
+# Create and activate a virtual environment
 python -m venv venv
-
-# Activate it
 # On Windows:
 venv\Scripts\activate
 # On macOS/Linux:
 source venv/bin/activate
 
-# Install dependencies
+# Install the required dependencies
 pip install -r requirements.txt
 ```
 
----
+### 3\. Download the Mistral Model
 
-### 3. Download the Mistral Model
+First, start the Ollama server in the background.
 
 ```bash
-# Start Ollama in the background
 ollama serve
 ```
 
-In another terminal:
+Then, in a **separate terminal window**, download the Mistral model. This is a one-time process and the download is approximately 4.1GB.
+
 ```bash
 ollama pull mistral
 ```
 
-> 🧠 Downloads the Mistral model (~4.1GB). Only needed once.
+### 4\. Run the Application
 
----
+You will need **two terminal windows** for this step.
 
-### 4. Run the App
+#### **Terminal 1: Start the FastAPI Backend**
 
-Open **two terminal windows**:
+This command starts the API server.
 
-#### Terminal 1: Start FastAPI Backend
 ```bash
 uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-#### Terminal 2: Start Streamlit Frontend
+#### **Terminal 2: Start the Streamlit Frontend**
+
+This command launches the user interface.
+
 ```bash
 streamlit run frontend/app.py
 ```
 
-🌐 Open the app at: [http://localhost:8501](http://localhost:8501)
+The application will be accessible in your browser at: [**http://localhost:8501**](https://www.google.com/search?q=http://localhost:8501).
 
----
+-----
 
 ## 🖼️ Screenshot
 
-![Sentiment Analyzer Screenshot](screenshots/screenshot.png)
+> 💡 `screenshots/sentiment-analyzer-home-screen.png`
 
-> 💡 *Replace with your own screenshot! Save it in a `screenshots/` folder.*
-
----
+-----
 
 ## 🧱 Architecture
 
-```
-[User] 
-   ↓
-[Streamlit UI] → HTTP POST → [FastAPI Backend]
-                                 ↓
-                          [Ollama + Mistral]
-                                 ↓
-                      ← Sentiment + Explanation
-```
+The application's architecture is a simple, effective pipeline:
 
-- **Frontend**: `frontend/app.py` – Streamlit interface with live feedback
-- **Backend**: `backend/main.py` – FastAPI with `/analyze` and `/explain` endpoints
-- **Model**: Runs locally via Ollama (`mistral`)
-- **Communication**: JSON over `localhost`
+> ![Architecture Diagram](screenshots/sentiment-analyzer-app-architecture.png)
 
-🔐 **No data leaves your machine. 100% private.**
+  * **Frontend**: The user interface is built with **Streamlit** (`frontend/app.py`).
+  * **Backend**: The API is powered by **FastAPI** (`backend/main.py`), handling analysis and explanation requests.
+  * **Model**: The **Mistral** LLM runs locally via **Ollama**.
+  * **Communication**: The frontend and backend communicate using JSON over `localhost`.
 
----
+🔐 **No data ever leaves your machine, ensuring complete privacy.**
 
-## 🛠️ Features
+-----
 
-- ✅ Classify sentiment as **Positive**, **Negative**, or **Neutral**
-- ✅ **Explain why** the sentiment was assigned (e.g., "Uses words like 'love' and 'perfect'")
-- ✅ Live **character count**
-- ✅ Warning for **non-text input** (e.g., numbers)
-- ✅ Input validation & error handling
-- ✅ Color-coded results (🟢/🔴/🟡)
-- ✅ Clear input button
-- ✅ Responsive and intuitive UI
+## API EndPonits
 
----
+  * **Get**: **/health** A simple health check to verify the application is running.
+  * **Post**: **/analyze** Analyzes the sentiment of a given text input.
+  * **Post**: **/explain** Explains the reasoning behind a sentiment analysis result.
+
+-----
+
+## 🛠️ Key Features
+
+  * **Sentiment Classification**: Classifies text as **Positive**, **Negative**, or **Neutral**.
+  * **Explainable AI**: Provides a clear explanation for each sentiment classification.
+  * **Live Feedback**: Includes a live character counter and input validation.
+  * **Intuitive UI**: Features color-coded results (🟢/🔴/🟡) and a "Clear Input" button for easy use.
+  * **Robust Handling**: Detects and warns against non-text input (e.g., numbers).
+
+-----
 
 ## 📂 Project Structure
 
 ```
 sentiment-analyzer-mistral/
 │
-├── .gitignore               # Ignores venv, cache, IDE files
+├── .gitignore               # Excludes virtual environments and cache
 ├── README.md                # This file
-├── requirements.txt         # Python dependencies
+├── requirements.txt         # List of Python dependencies
 │
 ├── backend/
-│   └── main.py              # FastAPI backend with analysis + explanation
+│   └── main.py              # FastAPI application logic
 │
 ├── frontend/
-│   └── app.py               # Streamlit frontend with explanation display
+│   └── app.py               # Streamlit UI
 │
-├── screenshots/             # (Optional) Add your app screenshots
-│   └── screenshot.png
-│
-└── venv/                    # (Ignored) Virtual environment
+└── screenshots/
+    └── screenshot.png       # App screenshot (optional)
 ```
 
----
+-----
 
-## 📄 License
+## 📌 Usage Tips
 
-MIT License
+  * **Be patient**: The analysis can take 5–60 seconds, as the model runs locally.
+  * **Use natural language**: The model performs best with full sentences or phrases.
+  * **Understand the "Why?"**: The explanation section is key to understanding the model's reasoning.
+  * **Non-text input**: Inputs without letters (e.g., "123") will be flagged as low-confidence.
+  * **Clear input**: Use the dedicated button to reset the text area and results.
 
-Copyright (c) 2025 [Your Name]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy  
-of this software and associated documentation files (the "Software"), to deal  
-in the Software without restriction, including without limitation the rights  
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell  
-copies of the Software, and to permit persons to whom the Software is  
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all  
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  
-SOFTWARE.
-
----
-
-## 📌 Tips for Users
-
-- ⏳ **Analysis takes 5–60 seconds** — be patient! The model runs locally.
-- 📝 Best results with **natural language** (e.g., sentences with emotion).
-- ⚠️ Inputs with no letters (e.g., `123 456`) are flagged as low-confidence.
-- 🔍 The **"Why?"** section explains the reasoning behind the classification.
-- 🗑️ Use the **"Clear Input & Result"** button to start over.
-
----
+-----
 
 ## 🚧 Future Improvements
 
-- 📎 Support file uploads (TXT, CSV)
-- 💾 Export results as `.txt` or `.json`
-- 🔤 Highlight key sentiment words in input
-- 📊 Confidence score (e.g., "High", "Medium", "Low")
-- 🐳 Docker support for one-click setup
-- 🌐 Multi-language sentiment analysis
+  * Support for file uploads (TXT, CSV).
+  * Export results to `.txt` or `.json` files.
+  * Highlight key sentiment words within the input text.
+  * Add a confidence score (e.g., "High", "Medium", "Low") for each result.
+  * Add generate a response based on the sentiment (e.g., "Thank you for your positive feedback!").
+  * Implement a history feature to track past analyses.
+  * Add Docker support for simplified, one-click setup.
+  * Implement multi-language sentiment analysis.
 
----
+-----
 
-## 🙌 Made with ❤️
+## 🙌 Credits
 
-By Sabelo Gumede – for **private, powerful, and explainable AI**.
+Made with ❤️ by Sabelo Gumede for **private, powerful, and explainable AI**.
 
-Have ideas or feedback? Open an issue or PR!
+Have ideas or feedback? Feel free to open an issue or submit a pull request.
 
-Keep building the future — locally. 🚀
-```
+Keep building the future—locally\! 🚀
+
+-----
+
+## 📄 License
+
+This project is licensed under the **MIT License**. For the full license text, please refer to the `LICENSE` file in the repository.
